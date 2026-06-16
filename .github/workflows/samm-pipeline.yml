@@ -212,16 +212,15 @@ jobs:
       - name: Python lint (flake8 + mypy)
         run: |
           pip install flake8 mypy
-          PYFLAKES_NODOCTEST=1 flake8 lemur --max-line-length=100
-        continue-on-error: true
+          PYFLAKES_NODOCTEST=1 flake8 lemur --max-line-length=100 --exclude=lemur/migrations,lemur/static || true
+          mypy lemur --ignore-missing-imports || true
 
       - name: Install and test
         run: |
           python -m venv ~/env
           source ~/env/bin/activate
           python -m pip install --upgrade pip setuptools
-          pip install -e .
-          pip install "file://`pwd`#egg=lemur[tests]"
+          pip install -e ".[tests]"
           coverage run --source lemur -m pytest --tb=short 2>&1
           coverage xml -o coverage.xml
       - name: Upload coverage
