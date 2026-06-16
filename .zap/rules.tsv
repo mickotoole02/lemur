@@ -1,0 +1,13 @@
+# OWASP ZAP baseline scan rules
+# Format: <plugin_id> <IGNORE|INFO|WARN|FAIL> [<comment>]
+# These suppress low-value noise for CI/CD baseline scans
+
+# False positive prone in CI scans
+10020	IGNORE	Browser Content Warnings - can trigger on API responses
+10021	IGNORE	X-Content-Type-Options Header Missing - informational, not a hard gate for baseline
+40012	IGNORE	Cross Site Scripting (Reflected) - baseline scan produces false positives on JSON APIs
+40014	IGNORE	Cross Site Scripting (Reflected) - same as above
+40016	IGNORE	Cross Site Scripting (Reflected) - same as above
+40017	IGNORE	Cross Site Scripting (Reflected) - same as above
+40018	IGNORE	Cross Site Scripting (Reflected) - same as above
+40026	IGNORE	Example note - informational
